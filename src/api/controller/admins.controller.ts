@@ -57,7 +57,7 @@ class AdminController {
       const { editorId } = req.payload;
       const { text } = req.body;
       const response = await axios({
-        baseURL: 'http://localhost:3020/update/article',
+        baseURL: 'http://localhost:3020/admin/article/update',
         method: 'PUT',
         headers: {
           X_AUTH: process.env.X_AUTH,
@@ -81,7 +81,7 @@ class AdminController {
       const { editorId } = req.payload;
       const { id } = req.body;
       const response = await axios({
-        baseURL: 'http://localhost:3020/delete/article',
+        baseURL: 'http://localhost:3020/admin/article/delete',
         method: 'DELETE',
         headers: {
           X_AUTH: process.env.X_AUTH,
