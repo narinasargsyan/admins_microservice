@@ -52,20 +52,21 @@ class AdminController {
     }
   };
 
-  updateArticle = async (req: Request & { payload: { editorId: number } }, res: Response) => {
+  updateArticle = async (req: Request & { payload: { id: number } }, res: Response) => {
     try{
-      const { editorId } = req.payload;
-      const { text } = req.body;
+      const { id } = req.payload;
+      const { text, articleId } = req.body;
       const response = await axios({
-        baseURL: 'http://localhost:3020/admin/article/update',
+        baseURL: 'http://localhost:3020/articles/api/admin/update',
         method: 'PUT',
         headers: {
           X_AUTH: process.env.X_AUTH,
           'Content-Type': 'application/json',
         },
         data: {
-          editorId,
+          editorId:id,
           text,
+          articleId,
         },
       });
       res.send({ response: response.data });
@@ -76,20 +77,20 @@ class AdminController {
     }
   };
 
-  deleteArticle = async (req: Request & { payload: { editorId: number } }, res: Response) => {
+  deleteArticle = async (req: Request & { payload: { id: number } }, res: Response) => {
     try{
-      const { editorId } = req.payload;
-      const { id } = req.body;
+      const { id } = req.payload;
+      const { articleId } = req.body;
       const response = await axios({
-        baseURL: 'http://localhost:3020/admin/article/delete',
+        baseURL: 'http://localhost:3020/articles/api/admin/delete',
         method: 'DELETE',
         headers: {
           X_AUTH: process.env.X_AUTH,
           'Content-Type': 'application/json',
         },
         data: {
-          editorId,
-          id,
+          editorId: id,
+          articleId,
         },
       });
       res.send({ response: response.data });

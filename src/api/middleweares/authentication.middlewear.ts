@@ -1,5 +1,5 @@
 import authService from "../services/auth.service";
-import { Response, Request, NextFunction} from "express";
+import { Response, Request, NextFunction } from "express";
 
 class AuthenticationMiddleware {
   async authenticate(req: Request & { payload: string , accessToken: string }, res: Response, next: NextFunction) {
