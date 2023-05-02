@@ -13,4 +13,7 @@ adminsRouter.post("/sign-in", validate("signInAdminsSchema"), admin.signIn);
 
 adminsRouter.use(authenticate);
 
+adminsRouter.put("/update", admin.updateArticle);
+adminsRouter.delete("/delete", admin.deleteArticle);
+
 export { adminsRouter };

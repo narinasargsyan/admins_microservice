@@ -1,6 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { models } from "../../db";
 import { Response, Request } from "express";
+import axios from 'axios';
 import authService from "../services/auth.service";
 
 class AdminController {
@@ -44,6 +45,54 @@ class AdminController {
         accessToken,
       };
       res.status(200).send(result);
+    } catch (err) {
+      console.log("err", err);
+      res.status(400).send("Something went wrong");
+      console.log("error=>", err);
+    }
+  };
+
+  updateArticle = async (req: Request & { payload: { editorId: number } }, res: Response) => {
+    try{
+      const { editorId } = req.payload;
+      const { text } = req.body;
+      const response = await axios({
+        baseURL: 'http://localhost:3020/update/article',
+        method: 'PUT',
+        headers: {
+          X_AUTH: process.env.X_AUTH,
+          'Content-Type': 'application/json',
+        },
+        data: {
+          editorId,
+          text,
+        },
+      });
+      res.send({ response: response.data });
+    } catch (err) {
+      console.log("err", err);
+      res.status(400).send("Something went wrong");
+      console.log("error=>", err);
+    }
+  };
+
+  deleteArticle = async (req: Request & { payload: { editorId: number } }, res: Response) => {
+    try{
+      const { editorId } = req.payload;
+      const { id } = req.body;
+      const response = await axios({
+        baseURL: 'http://localhost:3020/delete/article',
+        method: 'DELETE',
+        headers: {
+          X_AUTH: process.env.X_AUTH,
+          'Content-Type': 'application/json',
+        },
+        data: {
+          editorId,
+          id,
+        },
+      });
+      res.send({ response: response.data });
     } catch (err) {
       console.log("err", err);
       res.status(400).send("Something went wrong");
