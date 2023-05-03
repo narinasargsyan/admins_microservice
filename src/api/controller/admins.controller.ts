@@ -77,52 +77,10 @@ class AdminController {
     }
   };
 
-  getArticleById = async (req: Request, res: Response) => {
-    try{
-      const { id } = req.body;
-      const response = await axios({
-        baseURL: 'http://localhost:3020/articles/api/admin/update',
-        method: 'GET',
-        params: {
-          id:id
-        },
-        headers: {
-          X_AUTH: process.env.X_AUTH,
-          'Content-Type': 'application/json',
-        },
-      });
-      res.send({ response: response.data });
-    } catch (err) {
-      console.log("err", err);
-      res.status(400).send("Something went wrong");
-      console.log("error=>", err);
-    }
-  };
-
-  getArticleByUserId = async (req: Request, res: Response) => {
-    try{
-      const { userId } = req.body;
-      const response = await axios({
-        baseURL: 'http://localhost:3020/articles/api/admin',
-        method: 'GET',
-        params: {
-          userId:userId
-        },
-        headers: {
-          X_AUTH: process.env.X_AUTH,
-          'Content-Type': 'application/json',
-        },
-      });
-      res.send({ response: response.data });
-    } catch (err) {
-      console.log("err", err);
-      res.status(400).send("Something went wrong");
-      console.log("error=>", err);
-    }
-  };
 
   getArticleList = async (req: Request,res: Response) => {
     try{
+      const { id, userId, text } = req.body;
       const response = await axios({
         baseURL: 'http://localhost:3020/articles/api/admin/list',
         method: 'GET',
@@ -130,6 +88,9 @@ class AdminController {
           X_AUTH: process.env.X_AUTH,
           'Content-Type': 'application/json',
         },
+        data: {
+          id,userId,text
+        }
       });
       res.send({ response: response.data });
     } catch (err) {

@@ -13,8 +13,6 @@ adminsRouter.post("/sign-in", validate("signInAdminsSchema"), admin.signIn);
 
 adminsRouter.use(authenticate);
 
-adminsRouter.get("/article/", admin.getArticleById);
-adminsRouter.get("/article/user", admin.getArticleByUserId);
 adminsRouter.get("/", admin.getArticleList);
 adminsRouter.put("/update", admin.updateArticle);
 adminsRouter.delete("/delete", admin.deleteArticle);
