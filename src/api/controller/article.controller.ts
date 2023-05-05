@@ -7,7 +7,7 @@ class ArticleController {
             const { id } = req.payload;
             const { text, articleId } = req.body;
             const response = await axios({
-                baseURL: 'http://localhost:3020/articles/api/admin/update',
+                baseURL: `${process.env.ARTICLE_SERVICE_URL}/api/admin/update`,
                 method: 'PUT',
                 headers: {
                     X_AUTH: process.env.X_AUTH,
@@ -33,11 +33,12 @@ class ArticleController {
         try{
             const { id, userId, text } = req.body;
             const response = await axios({
-                baseURL: 'http://localhost:3020/articles/api/admin/list',
+                baseURL: `${process.env.ARTICLE_SERVICE_URL}/api/admin/list`,
                 method: 'GET',
                 headers: {
                     X_AUTH: process.env.X_AUTH,
                     'Content-Type': 'application/json',
+                    Authorization: req.headers.authorization,
                 },
                 data: {
                     id,userId,text
@@ -56,11 +57,12 @@ class ArticleController {
             const { id } = req.payload;
             const { articleId } = req.body;
             const response = await axios({
-                baseURL: 'http://localhost:3020/articles/api/admin/delete',
+                baseURL: `${process.env.ARTICLE_SERVICE_URL}/api/admin/delete`,
                 method: 'DELETE',
                 headers: {
                     X_AUTH: process.env.X_AUTH,
                     'Content-Type': 'application/json',
+                    Authorization: req.headers.authorization,
                 },
                 data: {
                     editorId: id,
