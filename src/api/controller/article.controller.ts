@@ -12,6 +12,7 @@ class ArticleController {
                 headers: {
                     X_AUTH: process.env.X_AUTH,
                     'Content-Type': 'application/json',
+                    Authorization: req.headers.authorization,
                 },
                 data: {
                     editorId:id,
